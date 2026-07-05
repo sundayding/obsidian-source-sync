@@ -1,0 +1,10 @@
+node_modules/
+src/
+tests/
+docs/
+*.map
+*.ts
+*.tsx
+.env
+.env.*
+.wrangler/

@@ -1,0 +1,61 @@
+name: Release Obsidian plugin
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f main.js
+          test -f manifest.json
+          test -f styles.css
+          node --check main.js
+          node <<'NODE'
+          const fs = require("fs");
+          const manifest = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
+          const tag = process.env.GITHUB_REF_NAME;
+          if (manifest.id !== "multi-source-sync") {
+            throw new Error(`Unexpected plugin id: ${manifest.id}`);
+          }
+          if (manifest.name !== "Obsidian Source Sync") {
+            throw new Error(`Unexpected plugin name: ${manifest.name}`);
+          }
+          if (manifest.version !== tag) {
+            throw new Error(`manifest.json version ${manifest.version} does not match tag ${tag}`);
+          }
+          NODE
+          for forbidden in src tests docs ".env" ".wrangler"; do
+            if [ -e "$forbidden" ]; then
+              echo "Forbidden release repository path found: $forbidden" >&2
+              exit 1
+            fi
+          done
+          if find . -name '*.map' -o -name '*.ts' -o -name '*.tsx' | grep -q .; then
+            echo "Forbidden source or source-map file found" >&2
+            exit 1
+          fi
+
+      - name: Create draft release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          gh release create "$tag" \
+            --title "$tag" \
+            --draft \
+            main.js manifest.json styles.css
