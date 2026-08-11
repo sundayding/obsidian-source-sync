@@ -422,6 +422,20 @@
   padding-top: 12px;
 }
 
+.mss-video-localization-prompt {
+  display: grid;
+  gap: 8px;
+  margin: 8px 0 12px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 28%, var(--mss-soft-border));
+  border-radius: var(--mss-radius);
+  background: color-mix(in srgb, var(--interactive-accent) 7%, var(--background-secondary));
+}
+
+.mss-video-localization-prompt .mss-panel-actions {
+  margin-top: 2px;
+}
+
 .mss-account-overview {
   display: flex;
   flex-wrap: wrap;
