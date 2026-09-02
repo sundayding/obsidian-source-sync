@@ -520,6 +520,112 @@
   margin: 8px 0 2px;
 }
 
+.mss-discovery-link-import {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 38%, var(--mss-soft-border));
+  border-radius: calc(var(--mss-radius) + 2px);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--interactive-accent) 8%, transparent), transparent 58%),
+    var(--background-primary);
+}
+
+.mss-discovery-link-heading {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mss-discovery-link-heading > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mss-discovery-link-heading strong {
+  font-size: var(--font-ui-medium);
+}
+
+.mss-link-limit {
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 10%, var(--background-primary));
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+}
+
+.mss-discovery-link-controls {
+  display: grid;
+  gap: 7px;
+}
+
+.mss-discovery-link-controls > label {
+  color: var(--text-normal);
+  font-weight: 600;
+}
+
+.mss-discovery-link-controls textarea {
+  width: 100%;
+  min-height: 118px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.mss-discovery-link-meta,
+.mss-discovery-link-theme {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.mss-discovery-link-meta {
+  justify-content: space-between;
+}
+
+.mss-discovery-link-theme {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.mss-discovery-link-actions {
+  margin-top: -2px;
+}
+
+.mss-discovery-link-note {
+  margin: -2px 0 0;
+}
+
+.mss-discovery-link-result {
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--mss-soft-border);
+}
+
+.mss-discovery-link-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mss-discovery-link-stats span {
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: var(--mss-soft-bg);
+  font-size: var(--font-ui-smaller);
+}
+
+.mss-discovery-experiments {
+  margin-top: 16px;
+}
+
 .mss-discovery-lock {
   display: grid;
   gap: 8px;
@@ -782,5 +888,19 @@
 
   .mss-discovery-footer span {
     white-space: normal;
+  }
+
+  .mss-discovery-link-import {
+    padding: 14px;
+  }
+
+  .mss-discovery-link-heading,
+  .mss-discovery-link-meta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mss-link-limit {
+    align-self: flex-start;
   }
 }
